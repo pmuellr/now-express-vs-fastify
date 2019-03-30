@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "name": "now-express-vs-fastify",
+  "builds": [
+    { "src": "lambdas/*.js", "use": "@now/node" }
+  ],
+  "routes": [
+    { "src": "/(?<name>[^/]+)", "dest": "/lambdas/${name}.js" }
+  ],
+  "env": {
+    "NO_PRO_KEY": "@no-pro-key"
+  }
+}
