@@ -6,6 +6,7 @@
     "@no-pro/runtime": "^1.0.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "fastify": "^2.1.0",
     "got": "^9.6.0",
     "helmet": "^3.16.0"
   },
