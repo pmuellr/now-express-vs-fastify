@@ -1,10 +1,16 @@
+'use strict'
+
 const express = require('express')
+const helmet = require('helmet')
 const bodyParser = require('body-parser')
+
 const getProfilingMiddleware = require('../lib/profiling')
 
 const app = express()
 
 app.use(getProfilingMiddleware())
+
+app.use(helmet())
 
 app.get('*', (req, res) => {
   res.set('Content-Type', 'text/html')
@@ -19,8 +25,12 @@ app.post('*', bodyParser.json(), (req, res) => {
 module.exports = app
 
 if (require.main === module) {
+  const http = require('http')
   const port = process.env.PORT || '3000'
-  app.listen(port, () => {
+  const server = http.createServer((req, res) => {
+    module.exports(req, res)
+  })
+  server.listen(port, () => {
     console.log(`server listening on http://localhost:${port}`)
   })
 }
